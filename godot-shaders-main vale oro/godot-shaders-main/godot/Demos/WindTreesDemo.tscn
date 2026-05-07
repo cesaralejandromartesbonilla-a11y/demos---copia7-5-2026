@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://syydvbuwb374"]
-
-[ext_resource type="PackedScene" uid="uid://d1dkqm4e2auq" path="res://Demos/WindTrees/WindTreeScene.tscn" id="1"]
-[ext_resource type="Script" uid="uid://neq6yu61egcl" path="res://addons/ShaderSecretsHelper/DemoScreen.gd" id="4"]
-
-[node name="WindTreesDemo" type="CanvasLayer"]
-script = ExtResource("4")
-
-[node name="WindTreeScene" parent="." instance=ExtResource("1")]
