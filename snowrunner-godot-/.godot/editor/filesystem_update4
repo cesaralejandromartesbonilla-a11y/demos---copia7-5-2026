@@ -1,0 +1,5 @@
+res://vehicles/vehiculos_MK2/vehiculos/chasis_test_1.tscn
+res://vehicles/vehiculos_MK2/modulos_scripts/modulo_direccion.gd
+res://ecenas/escena_tests.tscn
+res://vehicles/vehiculos_MK2/ControladorVehiculo.gd
+res://vehicles/scripts de vehiculos/spring_arm_3d.gd

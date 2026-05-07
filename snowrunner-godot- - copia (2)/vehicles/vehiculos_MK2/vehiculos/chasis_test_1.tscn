@@ -1,0 +1,305 @@
+[gd_scene format=3 uid="uid://81voalpl5jx6"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://dvilktcyy4x6c" path="res://PhyscalMaterial/wheel.tres" id="2_ky73y"]
+[ext_resource type="Script" uid="uid://cmqafoqonfcub" path="res://vehicles/vehiculos_MK2/modulos_scripts/ModuloSuspensionBrazo6DOFJoint.gd" id="3_ky73y"]
+[ext_resource type="Script" uid="uid://djdo3ncxpye60" path="res://vehicles/vehiculos_MK2/modulos_scripts/modulo_motor.gd" id="3_vmsf5"]
+[ext_resource type="Script" uid="uid://bo4w3lxd1mt4n" path="res://vehicles/vehiculos_MK2/modulos_scripts/modulo_direccion.gd" id="4_ky73y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q3514"]
+size = Vector3(0.6, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ky73y"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q3514"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vmsf5"]
+height = 0.40000004
+
+[sub_resource type="Curve" id="Curve_e2643"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xd6o8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_0s1nx"]
+curve_x = SubResource("Curve_e2643")
+curve_y = SubResource("Curve_xd6o8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7a607"]
+albedo_texture = SubResource("CurveXYZTexture_0s1nx")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jqa0l"]
+material = SubResource("StandardMaterial3D_7a607")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ngmm"]
+size = Vector3(1, 1, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8no5"]
+albedo_color = Color(1, 0.4627451, 0.4627451, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tpheb"]
+material = SubResource("StandardMaterial3D_o8no5")
+
+[node name="chasis" type="RigidBody3D" unique_id=346867468]
+mass = 1000.0
+
+[node name="suspencionDI" type="Node3D" parent="." unique_id=1018101604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.4, 1)
+
+[node name="Brazo" type="RigidBody3D" parent="suspencionDI" unique_id=339808026]
+mass = 40.0
+script = ExtResource("3_ky73y")
+
+[node name="ColisionBrazo" type="CollisionShape3D" parent="suspencionDI/Brazo" unique_id=1169986696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999998, -7.450581e-09, 2.9802322e-08)
+shape = SubResource("BoxShape3D_q3514")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="suspencionDI/Brazo" unique_id=1619457082]
+transform = Transform3D(0.6, 0, 0, 0, 0.19599998, 0, 0, 0, 0.19999999, 0.4, 0, 0)
+mesh = SubResource("BoxMesh_ky73y")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="suspencionDI" unique_id=224693836]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79999995, 0, 0)
+node_a = NodePath("../Brazo")
+node_b = NodePath("../Mangueta")
+angular_limit/enable = true
+angular_limit/upper = 0.17453292
+angular_limit/lower = 0.17453292
+
+[node name="PivoteChasis" type="HingeJoint3D" parent="suspencionDI" unique_id=1456437368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+node_a = NodePath("../Brazo")
+node_b = NodePath("../..")
+
+[node name="Eje_Traccion" type="HingeJoint3D" parent="suspencionDI" unique_id=439443834]
+transform = Transform3D(-4.371139e-08, 4.371139e-08, -1, 1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 0.8000001, 2.9802322e-08, 0)
+node_a = NodePath("../Rueda")
+node_b = NodePath("../Mangueta")
+
+[node name="Eje_Direccion" type="HingeJoint3D" parent="suspencionDI" unique_id=647498308 groups=["motor_direccion"]]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.8000001, 2.9802322e-08, 0)
+node_a = NodePath("../Mangueta")
+node_b = NodePath("../Rueda")
+
+[node name="Mangueta" type="RigidBody3D" parent="suspencionDI" unique_id=1639535346]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, 0, 0)
+mass = 10.0
+physics_material_override = ExtResource("2_ky73y")
+
+[node name="ColisionRueda" type="CollisionShape3D" parent="suspencionDI/Mangueta" unique_id=391794108]
+shape = SubResource("SphereShape3D_q3514")
+disabled = true
+
+[node name="Rueda" type="RigidBody3D" parent="suspencionDI" unique_id=1171388394]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, 0, 0)
+mass = 80.0
+physics_material_override = ExtResource("2_ky73y")
+
+[node name="ColisionRueda" type="CollisionShape3D" parent="suspencionDI/Rueda" unique_id=1975070152]
+shape = SubResource("CylinderShape3D_vmsf5")
+
+[node name="MeshRueda" type="MeshInstance3D" parent="suspencionDI/Rueda" unique_id=1566576052]
+transform = Transform3D(1, 0, 0, 0, 0.19999999, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_jqa0l")
+
+[node name="suspencionDD" type="Node3D" parent="." unique_id=632284606]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.39999998, -0.4, 1)
+
+[node name="Brazo" type="RigidBody3D" parent="suspencionDD" unique_id=424939265]
+mass = 40.0
+script = ExtResource("3_ky73y")
+
+[node name="ColisionBrazo" type="CollisionShape3D" parent="suspencionDD/Brazo" unique_id=721907020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999998, -7.450581e-09, 2.9802322e-08)
+shape = SubResource("BoxShape3D_q3514")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="suspencionDD/Brazo" unique_id=1163166921]
+transform = Transform3D(0.6, 0, 0, 0, 0.19599998, 0, 0, 0, 0.19999999, 0.4, 0, 0)
+mesh = SubResource("BoxMesh_ky73y")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="suspencionDD" unique_id=112418508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79999995, 0, 0)
+node_a = NodePath("../Brazo")
+node_b = NodePath("../Mangueta")
+angular_limit/enable = true
+angular_limit/upper = 0.17453292
+angular_limit/lower = 0.17453292
+
+[node name="PivoteChasis" type="HingeJoint3D" parent="suspencionDD" unique_id=1476405429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+node_a = NodePath("../Brazo")
+node_b = NodePath("../..")
+
+[node name="Eje_Traccion" type="HingeJoint3D" parent="suspencionDD" unique_id=1677033266]
+transform = Transform3D(-4.371139e-08, 4.371139e-08, -1, 1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 0.8000001, 2.9802322e-08, 0)
+node_a = NodePath("../Rueda")
+node_b = NodePath("../Mangueta")
+
+[node name="Eje_Direccion" type="HingeJoint3D" parent="suspencionDD" unique_id=348880918 groups=["motor_direccion"]]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.8000001, 2.9802322e-08, 0)
+node_a = NodePath("../Mangueta")
+node_b = NodePath("../Rueda")
+
+[node name="Rueda" type="RigidBody3D" parent="suspencionDD" unique_id=720912738]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, 0, -1.1920929e-07)
+mass = 80.0
+physics_material_override = ExtResource("2_ky73y")
+
+[node name="ColisionRueda" type="CollisionShape3D" parent="suspencionDD/Rueda" unique_id=784110682]
+shape = SubResource("CylinderShape3D_vmsf5")
+
+[node name="MeshRueda" type="MeshInstance3D" parent="suspencionDD/Rueda" unique_id=1537288332]
+transform = Transform3D(1, 0, 0, 0, 0.19999999, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_jqa0l")
+
+[node name="Mangueta" type="RigidBody3D" parent="suspencionDD" unique_id=1533758440]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, 0, 0)
+mass = 10.0
+physics_material_override = ExtResource("2_ky73y")
+
+[node name="ColisionRueda" type="CollisionShape3D" parent="suspencionDD/Mangueta" unique_id=1708789314]
+shape = SubResource("SphereShape3D_q3514")
+disabled = true
+
+[node name="suspencionTI" type="Node3D" parent="." unique_id=1369813771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.4, -1)
+
+[node name="Brazo" type="RigidBody3D" parent="suspencionTI" unique_id=1166584794]
+mass = 40.0
+script = ExtResource("3_ky73y")
+
+[node name="ColisionBrazo" type="CollisionShape3D" parent="suspencionTI/Brazo" unique_id=1979529343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999998, -7.450581e-09, 2.9802322e-08)
+shape = SubResource("BoxShape3D_q3514")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="suspencionTI/Brazo" unique_id=1594006621]
+transform = Transform3D(0.6, 0, 0, 0, 0.19599998, 0, 0, 0, 0.19999999, 0.4, 0, 0)
+mesh = SubResource("BoxMesh_ky73y")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="suspencionTI" unique_id=761271190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79999995, 0, 0)
+node_a = NodePath("../Brazo")
+node_b = NodePath("../Mangueta")
+angular_limit/enable = true
+angular_limit/upper = 0.17453292
+angular_limit/lower = 0.17453292
+
+[node name="PivoteChasis" type="HingeJoint3D" parent="suspencionTI" unique_id=1995636277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+node_a = NodePath("../Brazo")
+node_b = NodePath("../..")
+
+[node name="Eje_Traccion" type="HingeJoint3D" parent="suspencionTI" unique_id=1049043805 groups=["motor_traccion"]]
+transform = Transform3D(-4.371139e-08, 4.371139e-08, -1, 1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 0.8000001, 2.9802322e-08, 0)
+node_a = NodePath("../Rueda")
+node_b = NodePath("../Mangueta")
+
+[node name="Eje_Direccion" type="HingeJoint3D" parent="suspencionTI" unique_id=810708497]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.8000001, 2.9802322e-08, 0)
+node_a = NodePath("../Mangueta")
+node_b = NodePath("../Rueda")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+
+[node name="Rueda" type="RigidBody3D" parent="suspencionTI" unique_id=590851668]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, 0, 0)
+mass = 80.0
+physics_material_override = ExtResource("2_ky73y")
+
+[node name="ColisionRueda" type="CollisionShape3D" parent="suspencionTI/Rueda" unique_id=1885013667]
+shape = SubResource("CylinderShape3D_vmsf5")
+
+[node name="MeshRueda" type="MeshInstance3D" parent="suspencionTI/Rueda" unique_id=1733364811]
+transform = Transform3D(1, 0, 0, 0, 0.19999999, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_jqa0l")
+
+[node name="Mangueta" type="RigidBody3D" parent="suspencionTI" unique_id=829998502]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, 0, 0)
+mass = 10.0
+physics_material_override = ExtResource("2_ky73y")
+
+[node name="ColisionRueda" type="CollisionShape3D" parent="suspencionTI/Mangueta" unique_id=836465754]
+shape = SubResource("SphereShape3D_q3514")
+disabled = true
+
+[node name="suspencionTD" type="Node3D" parent="." unique_id=816889574]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.39999998, -0.4, -1)
+
+[node name="Brazo" type="RigidBody3D" parent="suspencionTD" unique_id=753718065]
+mass = 40.0
+script = ExtResource("3_ky73y")
+
+[node name="ColisionBrazo" type="CollisionShape3D" parent="suspencionTD/Brazo" unique_id=1242863086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999998, -7.450581e-09, 2.9802322e-08)
+shape = SubResource("BoxShape3D_q3514")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="suspencionTD/Brazo" unique_id=985570425]
+transform = Transform3D(0.6, 0, 0, 0, 0.19599998, 0, 0, 0, 0.19999999, 0.4, 0, 0)
+mesh = SubResource("BoxMesh_ky73y")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="suspencionTD" unique_id=124436067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79999995, 0, 5.9604645e-08)
+node_a = NodePath("../Brazo")
+node_b = NodePath("../Mangueta")
+angular_limit/enable = true
+angular_limit/upper = 0.17453292
+angular_limit/lower = 0.17453292
+
+[node name="PivoteChasis" type="HingeJoint3D" parent="suspencionTD" unique_id=1974891123]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+node_a = NodePath("../Brazo")
+node_b = NodePath("../..")
+
+[node name="Eje_Traccion" type="HingeJoint3D" parent="suspencionTD" unique_id=694706052 groups=["motor_traccion"]]
+transform = Transform3D(-4.371139e-08, 4.371138e-08, -1, 1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371138e-08, 0.8000001, 2.9802322e-08, 5.9604645e-08)
+node_a = NodePath("../Rueda")
+node_b = NodePath("../Mangueta")
+
+[node name="Eje_Direccion" type="HingeJoint3D" parent="suspencionTD" unique_id=2060203811]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.8000001, 2.9802322e-08, 5.9604645e-08)
+node_a = NodePath("../Mangueta")
+node_b = NodePath("../Rueda")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+
+[node name="Rueda" type="RigidBody3D" parent="suspencionTD" unique_id=103179443]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, 0, 5.9604645e-08)
+mass = 80.0
+physics_material_override = ExtResource("2_ky73y")
+
+[node name="ColisionRueda" type="CollisionShape3D" parent="suspencionTD/Rueda" unique_id=466327324]
+shape = SubResource("CylinderShape3D_vmsf5")
+
+[node name="MeshRueda" type="MeshInstance3D" parent="suspencionTD/Rueda" unique_id=1124726275]
+transform = Transform3D(1, 0, 0, 0, 0.19999999, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_jqa0l")
+
+[node name="Mangueta" type="RigidBody3D" parent="suspencionTD" unique_id=1425685766]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1, 0, 0)
+mass = 10.0
+physics_material_override = ExtResource("2_ky73y")
+
+[node name="ColisionRueda" type="CollisionShape3D" parent="suspencionTD/Mangueta" unique_id=1242657381]
+shape = SubResource("SphereShape3D_q3514")
+disabled = true
+
+[node name="ModuloMotor" type="Node" parent="." unique_id=733395047]
+script = ExtResource("3_vmsf5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1660120236]
+shape = SubResource("BoxShape3D_5ngmm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1160748007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3.95, 0, 0, 0)
+mesh = SubResource("BoxMesh_tpheb")
+
+[node name="modulo_direccion" type="Node" parent="." unique_id=738445361]
+script = ExtResource("4_ky73y")

@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://bqoxwtxn75hks"]
+
+[ext_resource type="Script" uid="uid://b81vwo060f1ww" path="res://creatures/scripts of creatures/creature_controller.gd" id="1_h4iuv"]
+[ext_resource type="Script" uid="uid://dgds2y4pk25mv" path="res://creatures/scrpt modules/interaction_manager.gd" id="2_7b13i"]
+[ext_resource type="Script" uid="uid://f5ut6m5076ky" path="res://creatures/scrpt modules/ability_manager.gd" id="3_lu3vk"]
+[ext_resource type="Script" uid="uid://b31r1yj7utd6v" path="res://creatures/scrpt modules/survival_manager.gd" id="4_fo1wl"]
+[ext_resource type="PackedScene" uid="uid://cr5e7k7fsccet" path="res://habilidades/fireball.tscn" id="4_gx0cy"]
+[ext_resource type="Script" uid="uid://dsqbwl28ywklb" path="res://creatures/scrpt modules/effect_manager.gd" id="5_mmdv3"]
+[ext_resource type="Script" uid="uid://corr1t2235mox" path="res://creatures/scrpt modules/level_manager.gd" id="6_hlrme"]
+[ext_resource type="Script" uid="uid://dislycohqex4x" path="res://creatures/scrpt modules/evolution_manager.gd" id="7_d85bq"]
+[ext_resource type="Script" uid="uid://ccpgmaj6aogfa" path="res://creatures/scrpt modules/stat_scaler.gd" id="8_nwb0i"]
+[ext_resource type="Script" uid="uid://cxgohrlgfh2iy" path="res://creatures/scrpt modules/combat_manager.gd" id="9_7b13i"]
+[ext_resource type="Script" uid="uid://ccewhhv3o6dug" path="res://creatures/scrpt modules/environment_manager.gd" id="10_lu3vk"]
+[ext_resource type="Script" uid="uid://bnj4h6drbtc71" path="res://creatures/scrpt modules/temperature_manager.gd" id="11_fo1wl"]
+[ext_resource type="PackedScene" uid="uid://dou8d5kf7hrju" path="res://models/ice.tscn" id="12_mmdv3"]
+[ext_resource type="Script" uid="uid://0lxwpcco8gg1" path="res://creatures/scrpt modules/hands_inventory.gd" id="13_hlrme"]
+[ext_resource type="Script" uid="uid://bmtsivkdxf8lt" path="res://creatures/scrpt modules/builder_manager.gd" id="14_d85bq"]
+[ext_resource type="PackedScene" uid="uid://chr25gquak0qn" path="res://habilidades/freeze.tscn" id="14_sat7o"]
+[ext_resource type="PackedScene" uid="uid://bi25mulqvsyyb" path="res://ecenas/mesas/crop_plot_2.tscn" id="15_nwb0i"]
+[ext_resource type="PackedScene" uid="uid://cvk0xwlfajo53" path="res://ecenas/construction_site.tscn" id="16_txjcq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nfa28"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a76wf"]
+radius = 1.4961382
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=71737248 groups=["persist", "player"]]
+script = ExtResource("1_h4iuv")
+can_swim = true
+can_fly = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1100711380]
+shape = SubResource("BoxShape3D_nfa28")
+
+[node name="InteractionManager" type="Area3D" parent="." unique_id=1457068211]
+script = ExtResource("2_7b13i")
+enable_farming_override = true
+crop_plot_scene = ExtResource("15_nwb0i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionManager" unique_id=43645724]
+shape = SubResource("SphereShape3D_a76wf")
+
+[node name="AbilityManager" type="Node" parent="." unique_id=159372260]
+script = ExtResource("3_lu3vk")
+equipped_abilities = Array[PackedScene]([ExtResource("4_gx0cy"), null])
+
+[node name="SurvivalManager" type="Node" parent="." unique_id=166208171]
+script = ExtResource("4_fo1wl")
+
+[node name="effect_manager" type="Node" parent="." unique_id=721601794]
+script = ExtResource("5_mmdv3")
+immunities = Array[String](["burn"])
+
+[node name="LevelManager" type="Node" parent="." unique_id=1560484017]
+script = ExtResource("6_hlrme")
+xp_requirement_base = 50.0
+
+[node name="EvolutionManager" type="Node" parent="." unique_id=1975190595]
+script = ExtResource("7_d85bq")
+
+[node name="StatScaler" type="Node" parent="." unique_id=1820475748]
+script = ExtResource("8_nwb0i")
+start_speed = 0.8
+end_health = 1500.0
+end_damage = 300.0
+end_speed = 3.0
+end_energy = 300.0
+
+[node name="CombatManager" type="Node" parent="." unique_id=524174870]
+script = ExtResource("9_7b13i")
+
+[node name="EnvironmentManager" type="Node" parent="." unique_id=33584868]
+script = ExtResource("10_lu3vk")
+
+[node name="TemperatureManager" type="Node" parent="." unique_id=1492102649]
+script = ExtResource("11_fo1wl")
+ice_cube_scene = ExtResource("12_mmdv3")
+cold_effect_scene = ExtResource("14_sat7o")
+
+[node name="HandsInventory" type="Node" parent="." unique_id=1961533835 node_paths=PackedStringArray("left_hand_marker", "right_hand_marker")]
+script = ExtResource("13_hlrme")
+left_hand_marker = NodePath("../HandLeft")
+right_hand_marker = NodePath("../HandRight")
+
+[node name="BuilderManager" type="Node" parent="." unique_id=156781697 node_paths=PackedStringArray("blueprint_label")]
+script = ExtResource("14_d85bq")
+construction_site_scene = ExtResource("16_txjcq")
+crop_plot_scene = ExtResource("15_nwb0i")
+blueprint_label = NodePath("../Label")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1222938228]
+spring_length = 5.0
+margin = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1438358142]
+
+[node name="ModelHolder" type="Node3D" parent="." unique_id=990863047]
+
+[node name="RoofDetector" type="RayCast3D" parent="." unique_id=1356974474]
+transform = Transform3D(1, 0, 0, 0, -4, -8.742279e-08, 0, 3.496911e-07, -1.0000002, 0, 0, 0)
+
+[node name="HandLeft" type="Marker3D" parent="." unique_id=68078122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
+
+[node name="HandRight" type="Marker3D" parent="." unique_id=2005294105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1)
+
+[node name="GroundDetector" type="RayCast3D" parent="." unique_id=1320776742]
+
+[node name="Label" type="Label" parent="." unique_id=574814710]
+offset_right = 40.0
+offset_bottom = 23.0

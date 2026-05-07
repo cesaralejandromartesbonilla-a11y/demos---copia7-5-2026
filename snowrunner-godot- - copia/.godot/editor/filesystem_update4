@@ -1,0 +1,6 @@
+res://vehicles/vehiculos/camioneta_base_1/camioneta_base.tscn
+res://texturas/barro_estandar.tres
+res://texturas/barro_extremo.tres
+res://texturas/barro_ligero.tres
+res://texturas/barro_profundo.tres
+res://vehicles/modulos/skeleton_3d.gd

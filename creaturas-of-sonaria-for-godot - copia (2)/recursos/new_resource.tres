@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CreatureData" load_steps=3 format=3 uid="uid://cfmmtdvb0uebw"]
+
+[ext_resource type="Script" uid="uid://bo75guvl3khwr" path="res://scripts de recursos/creature_data.gd" id="1_20jw2"]
+[ext_resource type="PackedScene" uid="uid://q8rh5bpm8btm" path="res://creatures/creatures/character_body_3d.tscn" id="1_x0o45"]
+
+[resource]
+script = ExtResource("1_20jw2")
+creature_scene = ExtResource("1_x0o45")
+metadata/_custom_type_script = "uid://bo75guvl3khwr"

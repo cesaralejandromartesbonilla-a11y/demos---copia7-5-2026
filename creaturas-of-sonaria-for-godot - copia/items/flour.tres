@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=6 format=3 uid="uid://bufeyxraap052"]
+
+[ext_resource type="Script" uid="uid://pn1ld58jj7o2" path="res://scripts de recursos/Item_Data.gd" id="1_gxnrq"]
+[ext_resource type="Resource" uid="uid://bpv7vmanycrjw" path="res://items/seed_wheat.tres" id="2_uypil"]
+[ext_resource type="Script" uid="uid://bgxcbs4vbbqp2" path="res://scripts de recursos/RecipeData.gd" id="2_xk24r"]
+[ext_resource type="Resource" uid="uid://0w1wasy6mvox" path="res://items/asadon.tres" id="3_uypil"]
+[ext_resource type="Resource" uid="uid://dmd8ajmbchun1" path="res://items/hongo.tres" id="4_gcw6w"]
+
+[resource]
+script = ExtResource("2_xk24r")
+recipe_name = "harina"
+required_items = Array[ExtResource("1_gxnrq")]([ExtResource("2_uypil"), ExtResource("3_uypil")])
+result_item = ExtResource("4_gcw6w")
+metadata/_custom_type_script = "uid://bgxcbs4vbbqp2"

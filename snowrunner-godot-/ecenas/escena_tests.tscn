@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cqvjmm6r63g35"]
+
+[ext_resource type="Script" uid="uid://cgfvxv3t4trbr" path="res://vehicles/scripts de vehiculos/spring_arm_3d.gd" id="2_mssvn"]
+[ext_resource type="PackedScene" uid="uid://81voalpl5jx6" path="res://vehicles/vehiculos_MK2/vehiculos/chasis_test_1.tscn" id="3_30vra"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_mssvn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30vra"]
+albedo_color = Color(0.46618086, 0.4661808, 0.4661808, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_khqcw"]
+material = SubResource("StandardMaterial3D_30vra")
+
+[node name="Node3D" type="Node3D" unique_id=1084444124]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=349634395]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=345321584]
+shape = SubResource("WorldBoundaryShape3D_mssvn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=754190912]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_khqcw")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=735404523]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 4.627935, 1.9000001)
+collision_mask = 2
+script = ExtResource("2_mssvn")
+distancia_zoom_min = 1.0
+distancia_zoom_max = 15.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=379561638]
+
+[node name="chasis" parent="." unique_id=346867468 instance=ExtResource("3_30vra")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, 0)

@@ -1,0 +1,16 @@
+res://ecenas/mesas/furnace_industrial_logistic.tscn
+res://texturas/pool_textur.tres
+res://items/data/tools/asadon.tres
+res://items/data/consumable/manzana_data.tres
+res://items/data/seeds/semilla_agua.tres
+res://items/data/fuel/wood.tres
+res://items/data/seeds/visuals/tree_apple.tres
+res://items/data/seeds/arbol_manzana.tres
+res://items/data/seeds/visuals/fungus.tres
+res://items/data/seeds/hongo.tres
+res://items/data/tools/bucket_without_water.tres
+res://items/data/tools/bucket with water.tres
+res://items/data/seeds/visuals/wheat_visual.tres
+res://items/data/seeds/seed_wheat.tres
+res://items/data/consumable/refined/flour.tres
+res://items/data/consumable/refined/bread.tres

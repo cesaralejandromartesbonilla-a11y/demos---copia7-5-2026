@@ -1,0 +1,26 @@
+res://creatures/scrpt modules/builder_manager.gd
+res://creatures/creatures/character_body_3d3.tscn
+res://items/data/consumable/refined/flour.tres
+res://items/data/consumable/refined/bread.tres
+res://items/data/consumable/manzana_data.tres
+res://items/data/tools/bucket_without_water.tres
+res://items/data/seeds/visuals/wheat_visual.tres
+res://items/data/seeds/seed_wheat.tres
+res://items/data/tools/asadon.tres
+res://texturas/pool_textur.tres
+res://items/data/seeds/semilla_agua.tres
+res://items/data/fuel/wood.tres
+res://items/data/seeds/visuals/tree_apple.tres
+res://items/data/seeds/arbol_manzana.tres
+res://items/data/seeds/visuals/fungus.tres
+res://items/data/seeds/hongo.tres
+res://items/data/tools/bucket with water.tres
+res://ecenas/mesas/furnace_industrial_logistic.tscn
+res://ecenas/mesas/mega_factory.tscn
+res://ecenas/mesas/processor_manager.gd
+res://ecenas/mesas/manager_hud.tscn
+res://ecenas/mesas/manager_hud.gd
+res://ecenas/scripts_modulos/LogicConnector.gd
+res://ecenas/world.tscn
+res://ecenas/mesas/generator.tscn
+res://ecenas/scripts_modulos/motor_rotativo.gd

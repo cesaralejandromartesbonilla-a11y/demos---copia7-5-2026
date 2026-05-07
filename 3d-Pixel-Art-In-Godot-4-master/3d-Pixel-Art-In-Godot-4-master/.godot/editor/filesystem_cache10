@@ -1,0 +1,11 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1768447273
+DirectionalLight3D.gd::GDScript::4287102132859745662::1705491558::0::1::::<>DirectionalLight3D<><>0<>1<><>::
+icon.svg::CompressedTexture2D::5282314347540514075::1705491558::1768447275::1::::<><><>0<>0<>8ab2317dc47ff033371afd8a9ea724e3<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex::
+main.tscn::PackedScene::4713213200210193548::1705491558::0::1::::<><><>0<>0<><>::uid://cnd7i1kucwpvq::::res://models/icosphere.glb<>res://DirectionalLight3D.gd<>res://scripts/spin.gd<>res://outline.gdshader<>uid://chi17fb3dyt6b::::res://icon.svg
+outline.gdshader::Shader::3619070344627643652::1705491558::0::1::::<><><>0<>0<><>::
+README.md::TextFile::-1::1705491558::0::1::::<><><>0<>0<><>::
+::res://models/::1705491558
+icosphere.glb::PackedScene::5693448080029980262::1705491558::1768447276::1::::<><><>0<>0<>74fcdabe72404a22572b020ecad9c891<>res://.godot/imported/icosphere.glb-fe561c341942b5de3c68acb46c901bbd.scn::
+::res://scripts/::1705491558
+spin.gd::GDScript::2408712139681296796::1705491558::0::1::::<>Node3D<><>0<>1<><>::

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ProductionLineData" format=3 uid="uid://m1jxsyviyhgg"]
+
+[ext_resource type="Script" uid="uid://bgxcbs4vbbqp2" path="res://scripts de recursos/RecipeData.gd" id="1_c1rwu"]
+[ext_resource type="Texture2D" uid="uid://2ik48eqwp8o8" path="res://icon.svg" id="1_f306l"]
+[ext_resource type="Script" uid="uid://1s63qmwog13e" path="res://scripts de recursos/ProductionLineData.gd" id="2_svfg0"]
+[ext_resource type="Resource" uid="uid://bufeyxraap052" path="res://items/data/recipe/flour.tres" id="3_efrxj"]
+[ext_resource type="Resource" uid="uid://bykcxvv5al08l" path="res://items/data/recipe/bread.tres" id="4_823lq"]
+
+[resource]
+script = ExtResource("2_svfg0")
+line_name = "MegaReceta de pan"
+description = "esta es una receta para hacer pan en una sola maquina sin añadidos todo centralizado sin coneciones extras"
+line_icon = ExtResource("1_f306l")
+required_steps = Array[ExtResource("1_c1rwu")]([ExtResource("3_efrxj"), ExtResource("4_823lq")])
+metadata/_custom_type_script = "uid://1s63qmwog13e"

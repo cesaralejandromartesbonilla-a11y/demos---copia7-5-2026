@@ -1,0 +1,57 @@
+1. Configuración Inicial
+Configura tu identidad (solo se hace una vez al instalar Git).
+git config --global user.name "Tu Nombre"
+Uso: Establece el nombre que aparecerá en tus versiones (commits).
+git config --global user.email "tu@email.com"
+Uso: Vincula tus cambios con tu cuenta de GitHub.
+2. Crear y Clonar
+git init
+Uso: Crea un repositorio local nuevo en la carpeta donde estés parado.
+git clone https://github.com
+Uso: Descarga una copia exacta de un repositorio de GitHub a tu computadora.
+3. El Ciclo de Trabajo (Guardar cambios)
+Estos tres se usan casi siempre juntos y en este orden:
+git add .
+Uso: Prepara todos los archivos nuevos o modificados para ser guardados.
+git commit -m "Mensaje descriptivo"
+Uso: Crea una "foto" o versión de tus archivos con un comentario de lo que hiciste.
+git push origin main
+Uso: Sube tus versiones locales (commits) al repositorio en GitHub.
+4. Sincronización y Actualización
+git pull origin main
+Uso: Descarga y combina los cambios que están en GitHub con tus archivos locales.
+git fetch
+Uso: Revisa si hay cambios en la nube sin descargarlos todavía a tus archivos.
+git push origin main --force
+Uso: Sobrescribe todo el repositorio en GitHub con lo que tienes en tu PC (borra el historial remoto).
+5. Gestión de Remotos (Conexiones)
+git remote add origin https://github.com
+Uso: Conecta tu carpeta local con un repositorio vacío en GitHub por primera vez.
+git remote -v
+Uso: Lista todas las direcciones de GitHub a las que está conectada tu carpeta.
+git remote remove nombre
+Uso: Elimina la conexión con un repositorio remoto específico.
+6. Ramas (Branches)
+git branch -M main
+Uso: Renombra tu rama principal a "main" (estándar actual de GitHub).
+git checkout -b nombre-rama
+Uso: Crea una rama nueva y se cambia a ella para trabajar sin alterar el código principal.
+7. Estado y Revisión
+git status
+Uso: Te dice qué archivos has modificado, cuáles vas a guardar y en qué rama estás.
+git log
+Uso: Muestra el historial de todos los cambios (commits) realizados en el proyecto.
+
+
+#===========================================================
+#===El orden correcto para limpiar y resubir todo es este===
+#===========================================================
+1.git init (Para reiniciar el control de versiones si borraste la carpeta .git).
+
+2.git remote add origin https://github.com (Para decirle a Git a dónde enviarlo).
+
+3.git add . (¡Súper importante! Para marcar todos tus archivos actuales).
+
+4.git commit -m "Reinicio total" (Para crear el paquete con tus archivos).
+
+5.git push origin main --force (Para enviarlo y borrar lo que había antes en la nube).

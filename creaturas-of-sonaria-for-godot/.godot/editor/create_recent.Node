@@ -1,0 +1,15 @@
+res://ecenas/scripts_modulos/logic_receiver_component.gd
+VBoxContainer
+HBoxContainer
+CollisionShape3D
+Area3D
+HScrollBar
+ScrollContainer
+HingeJoint3D
+MeshInstance3D
+RigidBody3D
+SliderJoint3D
+Timer
+Node
+StaticBody3D
+Node3D

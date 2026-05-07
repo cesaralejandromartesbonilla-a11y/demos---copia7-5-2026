@@ -1,0 +1,5 @@
+res://vehicles/vehiculos_MK2/vehiculos/chasis_test_1.tscn
+res://vehicles/vehiculos_MK2/modulos_scripts/modulo_motor.gd
+res://vehicles/vehiculos_MK2/modulos_scripts/modulo_direccion.gd
+res://vehicles/vehiculos_MK2/modulos_scripts/ModuloSuspensionBrazo6DOFJoint.gd
+res://ecenas/escena_tests.tscn

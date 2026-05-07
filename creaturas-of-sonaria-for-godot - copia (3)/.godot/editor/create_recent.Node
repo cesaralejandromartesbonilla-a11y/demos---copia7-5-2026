@@ -1,0 +1,14 @@
+StaticBody3D
+Area3D
+Node3D
+CollisionShape3D
+MeshInstance3D
+Label3D
+Node
+OmniLight3D
+Marker3D
+AnimationPlayer
+Label
+InventoryComponent
+Button
+ProgressBar

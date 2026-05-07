@@ -1,0 +1,15 @@
+Label3D
+Node
+OmniLight3D
+StaticBody3D
+MeshInstance3D
+CollisionShape3D
+Area3D
+Marker3D
+AnimationPlayer
+Label
+InventoryComponent
+Button
+ProgressBar
+VBoxContainer
+ScrollContainer

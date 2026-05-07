@@ -1,0 +1,8 @@
+res://assets/animation/attack1.res
+res://assets/animation/attack2.res
+res://assets/animation/die.res
+res://assets/animation/idle.res
+res://assets/animation/walk.res
+res://scenes/demo-level.tscn
+res://assets/default_env.tres
+res://assets/materials/shadow.tres

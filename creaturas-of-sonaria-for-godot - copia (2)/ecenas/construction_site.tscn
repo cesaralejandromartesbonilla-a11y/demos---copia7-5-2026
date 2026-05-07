@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvk0xwlfajo53"]
+
+[ext_resource type="Script" uid="uid://pt2mnwkwnph3" path="res://script/construction_site.gd" id="1_g6arn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_diyhh"]
+
+[node name="ConstructionSite" type="Area3D" groups=["estructuras"]]
+script = ExtResource("1_g6arn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_diyhh")

@@ -1,0 +1,45 @@
+Aquí tienes los pasos para dejarlo configurado de forma clara:
+1. Renombra tus remotos para no confundirte
+Vamos a ponerles nombres que describan su función ("estatico" y "dinamico"):
+powershell
+# Cambiamos el nombre de 'origin' a 'estatico'
+git remote rename origin estatico
+
+# Cambiamos el nombre de 'segundo-repo' a 'dinamico'
+git remote rename segundo-repo dinamico
+Usa el código con precaución.
+
+(Si segundo-repo no existe aún, usa git remote add dinamico [URL]).
+2. Configura las URLs correctas
+Asegúrate de que cada uno apunte a donde quieres:
+powershell
+# Para el estático
+git remote set-url estatico https://github.com
+
+# Para el dinámico (el que vas a estar actualizando o borrando)
+git remote set-url dinamico https://github.com
+Usa el código con precaución.
+
+3. Cómo usarlos de forma independiente
+Ahora tienes el control total. Dependiendo de lo que quieras hacer, usas un comando u otro:
+Para actualizar el repositorio estático (sin tocar el otro):
+powershell
+git push estatico main
+Usa el código con precaución.
+
+Para actualizar (o sobrescribir) el repositorio dinámico:
+powershell
+git push dinamico main --force
+Usa el código con precaución.
+
+4. Verifica tu configuración
+Usa tu alias git donde y deberías ver algo así:
+dinamico -> URL de creatures-of-temu...
+estatico -> URL de demos-copia...
+Tip de Automatización:
+Si quieres un solo comando que actualice el dinámico por completo (borrando lo anterior) pero no toque el estático, puedes crear este alias:
+powershell
+git config --global alias.update-din "push dinamico main --force"
+Usa el código con precaución.
+
+Uso: Solo escribes git update-din y el repositorio dinámico se limpia y se actualiza con tus archivos actuales.

@@ -1,0 +1,59 @@
+divisiones taxonomicas
+
+Dominio
+Reino
+Filo (o División en plantas)
+Clase
+Orden
+Familia
+Género
+Especie
+
+recordatorio de la etapa 3
+
+Aquí tienes el plano arquitectónico de cómo abordaremos estas mecánicas:
+
+1. Sistema de Guardado y Persistencia Universal
+Para guardar un mundo dinámico (donde los lagos se vacían, la comida aparece y los edificios se quedan donde los pusiste), usaremos el patrón de Grupos de Persistencia.
+
+El Grupo persist: Cualquier objeto en tu juego que deba recordarse (una parcela, un manzano, un lago, un muro) se añadirá a un grupo en Godot llamado persist.
+
+El Diccionario de Guardado: Cada uno de estos objetos tendrá una función obligatoria llamada save_data(). Esta función devolverá un diccionario con:
+
+La ruta de su escena original (.tscn) para saber qué instanciar al cargar.
+
+Su Transform3D (Posición y Rotación).
+
+Sus variables únicas (ej. cuánta agua le queda al lago, o qué nivel de crecimiento tiene el cultivo).
+
+JSON sobre SQLite: Para el 99% de los juegos en Godot, guardar estos diccionarios serializados en un archivo .json o .save mediante FileAccess es mucho más rápido de programar, 
+más fácil de depurar (puedes leer el archivo de texto) y rinde perfectamente bien comparado con montar una base de datos SQLite.
+
+2. Inventario de Criaturas (Base de Datos del Jugador)
+Esto se guardará en un archivo separado (el "Perfil del Jugador"). No guardaremos nodos físicos, sino pura información en diccionarios:
+
+Fichas (Tokens): Un simple Array de strings con los IDs de las criaturas que el jugador tiene derecho a crear.
+
+Ranuras (Slots): Un Array de diccionarios. Cada diccionario representa una vida activa de una criatura con sus "stats" exactos: { "creature_id": "dragon_agua", "age": 12, "hunger": 50, "mutations": ["aletas_grandes"] }.
+
+3. Agricultura Modular Sistémica
+Para no escribir 50 scripts distintos para 50 plantas, usaremos Arquitectura basada en Datos (Data-Driven) apoyándonos en los Recursos (ItemData).
+
+El Recurso de la Semilla dicta las reglas: Tu archivo .tres tendrá variables nuevas como agua_por_minuto, resistencia_plagas, tipo_suelo_requerido, y tiempo_cosecha.
+
+La Parcela es el Motor: La parcela será un script inteligente que lee esas reglas. Tendrá variables de entorno (humedad_actual, nivel_plagas, nutrientes). Cada cierto tiempo, 
+la parcela restará el agua_por_minuto de la semilla a su humedad_actual. Si la humedad llega a cero, el cultivo empieza a perder salud.
+
+Esto te permite que el Trigo y las Algas usen exactamente el mismo script de parcela, pero reaccionen de forma completamente distinta solo cambiando los números en su archivo .tres.
+
+4. Sistema de Construcción (Planos y Rejilla)
+Para lograr un sistema estilo "primero planifica, luego aporta materiales" sin que los objetos se solapen, dividiremos la construcción en tres fases:
+
+Fase de Holograma (Plano): Instanciamos el modelo 3D de la estructura, pero le apagamos todas las físicas (RigidBody). En su lugar, le ponemos un Area3D con un material transparente. 
+Si el Area3D detecta que está tocando un árbol u otro muro, el material se vuelve rojo y bloquea el clic. Si está libre, se vuelve azul o verde.
+
+Rejilla (Grid Snapping): Mediante matemáticas simples, podemos redondear la posición del raycast de tu cámara para que el holograma salte de metro en metro (ej. round(posicion / tamaño_grid) * tamaño_grid), 
+permitiendo encajar paredes a la perfección.
+
+Fase de Aporte: Al hacer clic, el "Holograma Azul" se queda anclado en el mundo físico esperando recursos. El jugador interactúa con él para depositar madera o piedra. Al llegar al 100%, 
+borramos el holograma e instanciamos la escena real definitiva con sus físicas y colisiones activas.

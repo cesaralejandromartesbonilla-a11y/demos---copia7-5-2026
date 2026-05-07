@@ -1,0 +1,62 @@
+[gd_scene load_steps=16 format=3 uid="uid://cio84mnhin6t5"]
+
+[ext_resource type="Script" uid="uid://cvemq7wv6pps3" path="res://ecenas/crafting_table.gd" id="1_vhjr5"]
+[ext_resource type="Script" uid="uid://bgxcbs4vbbqp2" path="res://scripts de recursos/RecipeData.gd" id="2_0w7t3"]
+[ext_resource type="Resource" uid="uid://bufeyxraap052" path="res://items/flour.tres" id="3_drbd3"]
+[ext_resource type="PackedScene" uid="uid://spoyqbxcmisr" path="res://ecenas/crafting_ui.tscn" id="4_iv8n6"]
+[ext_resource type="PackedScene" uid="uid://7wvclavu1i30" path="res://items/pickable_item.tscn" id="5_drbd3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bcv37"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yvnlx"]
+
+[sub_resource type="Gradient" id="Gradient_0w7t3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_drbd3"]
+noise_type = 5
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iv8n6"]
+noise = SubResource("FastNoiseLite_drbd3")
+color_ramp = SubResource("Gradient_0w7t3")
+in_3d_space = true
+as_normal_map = true
+
+[sub_resource type="Gradient" id="Gradient_txsjo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vv56v"]
+noise_type = 5
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_efky4"]
+noise = SubResource("FastNoiseLite_vv56v")
+color_ramp = SubResource("Gradient_txsjo")
+in_3d_space = true
+as_normal_map = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lsckw"]
+albedo_color = Color(0.7490196, 0.34901962, 0.09411765, 1)
+roughness_texture = SubResource("NoiseTexture2D_efky4")
+normal_enabled = true
+normal_scale = 0.8
+normal_texture = SubResource("NoiseTexture2D_iv8n6")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yg1cc"]
+material = SubResource("StandardMaterial3D_lsckw")
+
+[node name="CraftingTable" type="Area3D"]
+script = ExtResource("1_vhjr5")
+available_recipes = Array[ExtResource("2_0w7t3")]([ExtResource("3_drbd3")])
+ui_scene = ExtResource("4_iv8n6")
+item_base_scene = ExtResource("5_drbd3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_bcv37")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
+mesh = SubResource("BoxMesh_yvnlx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0.5, 0)
+mesh = SubResource("PlaneMesh_yg1cc")

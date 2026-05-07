@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bpv7vmanycrjw"]
+
+[ext_resource type="Resource" uid="uid://mvw36sv7fmrp" path="res://items/data/consumable/manzana_data.tres" id="1_r0n8s"]
+[ext_resource type="Script" uid="uid://pn1ld58jj7o2" path="res://scripts de recursos/Item_Data.gd" id="2_bquuq"]
+[ext_resource type="Resource" uid="uid://di3boklndinvb" path="res://items/data/tools/bucket_without_water.tres" id="3_i03a6"]
+[ext_resource type="Resource" uid="uid://wc4bhelghmsu" path="res://items/data/seeds/visuals/wheat_visual.tres" id="4_41k6b"]
+
+[sub_resource type="Curve" id="Curve_qhfca"]
+_data = [Vector2(0.08645533, 0), 0.0, 0.0, 0, 0, Vector2(0.08933717, 0.82272726), 0.0, 0.0, 0, 0, Vector2(0.3775216, 1), 0.7619934, 0.7619934, 0, 0, Vector2(0.99999, 0.87443185), -2.097055, -2.097055, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyg1w"]
+albedo_color = Color(0.76862746, 0.47843137, 0, 1)
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_3bw2h"]
+material = SubResource("StandardMaterial3D_qyg1w")
+curve = SubResource("Curve_qhfca")
+
+[resource]
+script = ExtResource("2_bquuq")
+item_name = "semilla de trigo"
+item_mesh = SubResource("TubeTrailMesh_3bw2h")
+is_seed = true
+result_item_data = ExtResource("1_r0n8s")
+secondary_result_data = ExtResource("3_i03a6")
+visual_data = ExtResource("4_41k6b")
+vulnerable_to_pests = false
+metadata/_custom_type_script = "uid://pn1ld58jj7o2"

@@ -1,0 +1,4 @@
+res://escenas/main.tscn
+res://bloons/bloons/red.tres
+res://escenas/modulos/WaveManager.gd
+res://Tower/proyectile/test.gd

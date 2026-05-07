@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://barad038s87v4"]
+
+[ext_resource type="Script" uid="uid://pn1ld58jj7o2" path="res://scripts de recursos/Item_Data.gd" id="1_ohk1u"]
+[ext_resource type="Resource" uid="uid://mvw36sv7fmrp" path="res://items/data/consumable/manzana_data.tres" id="1_x2ys3"]
+[ext_resource type="Resource" uid="uid://cnhr3at2ayhur" path="res://items/data/fuel/wood.tres" id="3_l6g7t"]
+[ext_resource type="Resource" uid="uid://dnvabfy5kp8t3" path="res://items/data/seeds/tree_apple.tres" id="4_swb18"]
+
+[sub_resource type="Curve" id="Curve_x2ys3"]
+_data = [Vector2(0, 0), 0.0, 4.249778, 0, 0, Vector2(0.2905983, 0.6137893), 0.0, 0.0, 0, 0, Vector2(0.6182337, 0.6283633), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.249781, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdvr0"]
+albedo_color = Color(0.30980393, 1, 0, 1)
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_noe7a"]
+material = SubResource("StandardMaterial3D_jdvr0")
+curve = SubResource("Curve_x2ys3")
+
+[resource]
+script = ExtResource("1_ohk1u")
+item_name = "manzano"
+item_mesh = SubResource("TubeTrailMesh_noe7a")
+is_seed = true
+result_item_data = ExtResource("1_x2ys3")
+secondary_result_data = ExtResource("3_l6g7t")
+visual_data = ExtResource("4_swb18")
+crop_type = 1
+metadata/_custom_type_script = "uid://pn1ld58jj7o2"
